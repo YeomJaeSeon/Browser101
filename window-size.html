@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div>
+      <span>window.screen : </span><span id="screenWidth"></span>,
+      <span id="screenHeight"></span>
+    </div>
+    <div>
+      <span>window.outer : </span><span id="outerWidth"> </span>,
+      <span id="outerHeight"></span>
+    </div>
+    <div>
+      <span>window.inner : </span><span id="innerWidth"></span>,
+      <span id="innerHeight"></span>
+    </div>
+    <div>
+      <span>documentElement.clientWidth : </span
+      ><span id="documentWidth"></span>, <span id="documentHeight"></span>
+    </div>
+    <script>
+      // document객체로 dom요소를 js변수에 할당! => addEventListener발생할때마다 받으면 좋지않다 미리 addEventListener밖에서 미리변수에
+      // dom요소를 할당받자
+      const screenWidth = document.querySelector("#screenWidth");
+      const screenHeight = document.querySelector("#screenHeight");
+      const outerWidth = document.querySelector("#outerWidth");
+      const outerHeight = document.querySelector("#outerHeight");
+      const innerWidth = document.querySelector("#innerWidth");
+      const innerHeight = document.querySelector("#innerHeight");
+      const documentWidth = document.querySelector("#documentWidth");
+      const documentHeight = document.querySelector("#documentHeight");
+      // screen, window, document의 width, height 보여줄 show함수 정의
+      const size = () => {
+        screenWidth.innerHTML = `${window.screen.width}`;
+        screenHeight.innerHTML = `${window.screen.height}`;
+        outerWidth.innerHTML = `${window.outerWidth}`;
+        outerHeight.innerHTML = `${window.outerHeight}`;
+        innerWidth.innerHTML = `${window.innerWidth}`;
+        innerHeight.innerHTML = `${window.innerHeight}`;
+        documentWidth.innerHTML = `${document.documentElement.clientWidth}`;
+        documentHeight.innerHTML = `${document.documentElement.clientHeight}`;
+      };
+      // 초기값
+      size();
+      //   resize이벤트 일어나면!
+      window.addEventListener("resize", () => {
+        size();
+      });
+    </script>
+  </body>
+</html>
