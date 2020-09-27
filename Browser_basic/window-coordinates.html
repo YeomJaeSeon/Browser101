@@ -18,6 +18,11 @@
     #particle {
       background-color: pink;
     }
+    .btn {
+      position: fixed;
+      top: 0px;
+      right: 0px;
+    }
   </style>
   <body>
     <div class="box"></div>
@@ -35,12 +40,29 @@
     <div class="box"></div>
     <div class="box"></div>
     <div class="box"></div>
+    <div class="btn">
+      <button class="scrollBy">scroll by 100px(y)</button>
+      <button class="scrollTo">scroll to 100px(y)</button>
+      <button class="scrollParticle">scroll into particle</button>
+    </div>
     <script>
       const pinkBox = document.querySelector("#particle");
       pinkBox.addEventListener("click", (e) => {
         console.log(pinkBox.getBoundingClientRect());
         console.log(`page x : ${e.pageX}, page y : ${e.pageY}`);
         console.log(`client x : ${e.clientX}, client y : ${e.clientY}`);
+      });
+      const scrollByBtn = document.querySelector(".scrollBy");
+      const scrollToBtn = document.querySelector(".scrollTo");
+      const scrollParticleBtn = document.querySelector(".scrollParticle");
+      scrollByBtn.addEventListener("click", () => {
+        window.scrollBy(0, 100);
+      });
+      scrollToBtn.addEventListener("click", () => {
+        window.scrollTo(0, 100);
+      });
+      scrollParticleBtn.addEventListener("click", () => {
+        pinkBox.scrollIntoView();
       });
     </script>
   </body>
