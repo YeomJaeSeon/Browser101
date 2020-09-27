@@ -35,7 +35,6 @@ setTimeout(()=>{~}, ~);
 그러므로 JS에서 BOM의 web apis를 사용할수있다.(BOM : Browser Object Model로 브라우저에서 제공하는 web apis를 가지고있다.)  
 
 ### JS에서 다양한 web apis사용
-        ```
         screenWidth.innerHTML = `${window.screen.width}`;  
         screenHeight.innerHTML = `${window.screen.height}`;  
         outerWidth.innerHTML = `${window.outerWidth}`;  
@@ -46,4 +45,3 @@ setTimeout(()=>{~}, ~);
         documentHeight.innerHTML = `${document.documentElement.clientHeight}`;  
         window.scrollTo(~);  
         window.scrollBy(~);  
-        ```
