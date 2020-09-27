@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coordinates</title>
+  </head>
+  <style>
+    body {
+      margin: 0;
+    }
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: beige;
+      margin: 50px;
+    }
+    #particle {
+      background-color: pink;
+    }
+  </style>
+  <body>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box" id="particle"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <script>
+      const pinkBox = document.querySelector("#particle");
+      pinkBox.addEventListener("click", (e) => {
+        console.log(pinkBox.getBoundingClientRect());
+        console.log(`page x : ${e.pageX}, page y : ${e.pageY}`);
+        console.log(`client x : ${e.clientX}, client y : ${e.clientY}`);
+      });
+    </script>
+  </body>
+</html>
