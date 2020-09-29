@@ -1,6 +1,6 @@
 # Browser101
 
-## Web apis basic
+## 브라우저에 대한 전반적인 이해를 위한 
 
 ### APIS
 api란?  
