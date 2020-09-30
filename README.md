@@ -1,6 +1,6 @@
 # Browser101
 
-## Web apis basic
+## 브라우저에 대한 전반적인 이해를 위한 
 
 ### APIS
 api란?  
@@ -45,3 +45,25 @@ setTimeout(()=>{~}, ~);
         documentHeight.innerHTML = `${document.documentElement.clientHeight}`;  
         window.scrollTo(~);  
         window.scrollBy(~);  
+
+### DOM에대한 전반적인 그림
+내가 만든 HTML파일을 브라우저가 읽을 때 ! 브라우저도 하나의 실행되는 어플리케이션 이므로 브라우저가 이해할수 있는 형태로 바뀌어야한다.  
+내가 만든 HTML파일을 읽을때 HTML TAG는 JavaScript의 Node오브젝트로 변환이 된다.  
+Node 오브젝트는 EventTarget오브젝트를 상속받고 Document, Element, Text .. 등의 오브젝트는 Node 오브젝트를 상속받는다. 그리고 HTMLElement, SVGElement는 Element 오브젝트를 상속받는다. 그리고 HTMLDivElement, HTMLButtonElement, HTMLInputElement 오브젝트들은 HTMLElement오브젝트를 상속받는다.  
+즉, HTML파일을 브라우저가 읽을 때 HTML TAG가 해당 태그에 맞는 요소(ex. HTMLDivElement)로 변환될때의 상속 관계를 나타낸다.  
+다시한번더 말하면 div태그가 브라우저가 읽어 HTMLDivElement 오브젝트로 변환되고 이 HTMLDivElement오브젝트는 EventTarget 클래스를 상속받기 때문에 HTMLDivElement오브젝트는 이벤트를 발생시킬수있다. (사실 모든 태그가 EventTarget클래스를 상속받으므로 이벤트 발생시킬수있어. 상속관계에서 가장 상위에 존재하잖아.)  
+지금까지 한말은 하나의 HTML 태그가 브라우저가 이해할수있는 형태인 오브젝트로 바뀌었을때 해당 오브젝트의 상속 관계를 말한 것이다.  
+그렇다면 실제로 내가 만든 HTML파일은 어떻게 브라우저가 읽는 것일까?  
+위에서 살짝 얘기했지만 하나의 html 태그에 맞물리는 브라우저가 이해할수있는 오브젝트가 있다고 했다.  
+모든 html 태그는 브라우저가 이해할수있는 형태로 변할 때 자신과 맞물리는 오브젝트(요소)가 존재하고 브라우저는 HTML파일을 위에서부터 한줄, 한줄 Parsing해나가며 해당 태그에 맞는 오브젝트로 변환한다.  
+이렇게 변환하다보면 HTML파일을 모두 Parsing했을 때 모든 태그들이 오브젝트로 변해있고 각 오브젝트들은 나무형태로 존재한다.  
+즉, 내가 만든 HTML파일을 브라우저는 오브젝트들로 구성된 하나의 큰 나무로 변환했다.  
+이 하나의 큰 나무가 DOM TREE이다.  
+정리하면 내가만든 HTML파일을 브라우저는 자신이 이해할수있는 오브젝트 형태로 바꾸는 데 바꾼 결과가 DOM TREE이다.  
+이 DOM TREE로 브라우저는 웹페이지상에 우리에게 보여주는 것이다.  
+우리가 만든 html, css, JavaScript로 파일은 브라우저 위에서 Window(브라우저의 전체적인 창), DOM(Document ... ), BOM(WEb apis .. ex)setTimeout, navigator, fetch, ..), JavaScript로써 존재하게 되는 것이다.  
+여기서 DOM은 트리형태로 DOM TREE형태로 존재하게 되는 것이고 "브라우저가 DOM을 읽는다"라는 표현은 내가 만든 HTML파일을 브라우저가 DOM TREE형태로 변환한다는 말과 같다.  
+Document와 DOM TREE의 차이는?  
+Document는 DOM TREE의 진입점이다.  
+Document는 내가 만든 문서(웹페이지)자체에 대한 전반적인 기능을 담고있는 오브젝트이다.  
+Document오브젝트를 통해서 DOM TREE의 각요소에 접근한다.  
