@@ -28,7 +28,7 @@
     <div></div>
     <script>
       document.addEventListener("wheel", (event) => {
-        event.preventDefault();
+        event.preventDefault(); // passive한 wheel같은 이벤트들은 preventDefault하지 않는게좋다.
         console.log("scrolling");
       });
       const checkbox = document.querySelector("input");
