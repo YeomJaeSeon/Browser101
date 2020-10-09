@@ -25,33 +25,23 @@ function onAdd() {
   input.value = "";
   input.focus(); //focus를 안주면 input태그에 focus가 안온다
 }
+
+let nextId = 0;
 function createItem(text) {
   const itemRow = document.createElement("li");
   itemRow.setAttribute("class", "item__row");
+  itemRow.setAttribute('data-id', nextId)
 
-  const item = document.createElement("div");
-  item.setAttribute("class", "item");
-
-  const span = document.createElement("span");
-  span.setAttribute("class", "item__name");
-  span.innerText = text;
-
-  const deleteBtn = document.createElement("button");
-  deleteBtn.setAttribute("class", "item__delete");
-  deleteBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`;
-  deleteBtn.addEventListener("click", () => {
-    items.removeChild(itemRow);
-  });
-
-  const itemDivider = document.createElement("div");
-  itemDivider.setAttribute("class", "item__divider");
-
-  item.appendChild(span);
-  item.appendChild(deleteBtn);
-
-  itemRow.appendChild(item);
-  itemRow.appendChild(itemDivider);
-
+  itemRow.innerHTML = `
+     <div class="item">
+        <span class="item__name">${text}</span>
+         <button class="item__delete">
+             <i class="fas fa-trash-alt" data-id=${nextId}></i>
+        </button>
+    </div>
+    <div class="item__divider"></div>
+  `;
+  ++nextId;
   return itemRow;
 }
 
@@ -63,3 +53,12 @@ input.addEventListener("keypress", (event) => {
     onAdd();
   }
 });
+
+items.addEventListener('click', (event)=>{
+  const id = event.target.dataset.id;
+    if(id){
+      // event.target.dataset.id가 존재하면! 이라는 조건문임
+        const toBeDeleted = document.querySelector(`.item__row[data-id="${id}"]`);
+        toBeDeleted.remove();
+    }
+})
