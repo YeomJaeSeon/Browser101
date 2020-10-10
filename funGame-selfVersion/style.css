@@ -1,20 +1,31 @@
 body {
   background-color: black;
-  text-align: center;
 }
 button {
   outline: none;
   cursor: pointer;
+  width: 60px;
+  height: 60px;
+  background-color: #faa671;
+  border: 5px solid black;
+  border-radius: 10px;
+  margin-top: 10px;
+  transition: transform 300ms ease;
+  font-size: 25px;
+}
+button:hover {
+  transform: scale(1.1);
 }
 
 .content {
+  text-align: center;
   margin: auto;
   width: 700px;
   height: 500px;
   border-radius: 20px;
   background: url("./img/background.png") center/cover no-repeat;
 }
-.playBtn {
+/* .playBtn {
   width: 60px;
   height: 60px;
   background-color: #faa671;
@@ -26,7 +37,7 @@ button {
 }
 .playBtn:hover {
   transform: scale(1.1);
-}
+} */
 
 .timer {
   margin: auto;
@@ -49,6 +60,12 @@ button {
   font-size: 40px;
   margin-top: 10px;
 }
+img {
+  position: absolute;
+  display: block;
+  cursor: pointer;
+}
+
 .monsters {
   margin-top: 40px;
   width: 100%;
@@ -56,4 +73,18 @@ button {
 }
 .invisible {
   display: none;
+}
+.alert {
+  width: 350px;
+  height: 150px;
+  background-color: black;
+  position: absolute;
+  bottom: 170px;
+  left: 280px;
+  opacity: 0.5;
+  border-radius: 20px;
+  z-index: 3;
+}
+.alert .replayBtn {
+  opacity: 1;
 }
