@@ -8,17 +8,26 @@ const alertBox = document.querySelector(".alert");
 const replayBtn = document.querySelector(".replayBtn");
 const message = document.querySelector("h1");
 
+// 소리
+const alertSound = new Audio("./sound/alert.wav");
+const bugSound = new Audio("./sound/bug_pull.mp3");
+const carrotSound = new Audio("./sound/carrot_pull.mp3");
+const winSound = new Audio("./sound/game_win.mp3");
+const bgSound = new Audio("./sound/bg.mp3");
+
 let start; //setInterval clearInterval을 위한 전역 변수
 let timerCount = 10; //제한시간 전역변수로 설정
 
 // timer 함수 10초 지나면 멈춤
 const timerFunction = () => {
   start = setInterval(() => {
+    bgSound.play();
     timer.innerText = `0:${timerCount}`;
     --timerCount;
     if (timerCount === -1) {
       message.innerText = "Time out!!!";
       createAlertBox();
+      alertSound.play();
       timerCount = 10;
     }
   }, 1000);
@@ -70,6 +79,7 @@ playBtn.addEventListener("click", () => {
 
   // stop 버튼 누름
   if (playBtn.children[0].className === "fas fa-square playBtn__stop") {
+    alertSound.play();
     playBtn.setAttribute("style", "opacity : 0");
     message.innerText = "STOP!!!";
     createAlertBox();
@@ -97,15 +107,20 @@ const getRandomInt = (min, max) => {
 };
 
 monsters.addEventListener("click", (event) => {
+  // 당근클릭
   if (event.target.className === "carrot") {
+    carrotSound.play();
     event.target.remove();
     count.innerText = carrotCount();
     if (carrotCount() === 0) {
       message.innerText = "SUCCESS!!!";
       createAlertBox();
+      winSound.play();
     }
   }
+  // bug클릭
   if (event.target.className === "bug") {
+    bugSound.play();
     message.innerText = "Oops,, Bug!!";
     createAlertBox();
   }
@@ -121,6 +136,7 @@ const carrotCount = () => {
 const createAlertBox = () => {
   alertBox.classList.remove("invisible");
   clearInterval(start); //alertBox 생성되면 시간 멈춰야함
+  bgSound.pause();
 };
 
 // alertBox삭제
