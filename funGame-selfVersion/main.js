@@ -92,6 +92,7 @@ playBtn.addEventListener("click", () => {
 
 // replay 버튼 클릭(처음부터 다시재생임)
 replayBtn.addEventListener("click", () => {
+  count.innerText = "10";
   deleteAlertBox();
   playBtn.setAttribute("style", "opacity : 1");
   rePosition();
