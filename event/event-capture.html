@@ -39,23 +39,18 @@
       const button = document.querySelector("button");
 
       outer.addEventListener("click", (event) => {
-        // if (event.target !== event.currentTarget) {
-        //   return;
-        // }
         console.log(`outer: ${event.currentTarget}, ${event.target}`);
       });
       middle.addEventListener("click", (event) => {
-        // if (event.target !== event.currentTarget) {
-        //   return;
-        // }
         console.log(`middle ${event.currentTarget}, ${event.target}`);
       });
       button.addEventListener("click", (event) => {
+        event.stopPropagation();
         console.log(`button1 ${event.currentTarget}, ${event.target}`);
       });
-      button.addEventListener("click", (event) => {
-        console.log(`button2 ${event.currentTarget}, ${event.target}`);
-      });
+      // button.addEventListener("click", (event) => {
+      //   console.log(`button2 ${event.currentTarget}, ${event.target}`);
+      // });
     </script>
   </body>
 </html>

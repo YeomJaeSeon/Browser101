@@ -24,11 +24,11 @@
       <li>10</li>
     </ul>
     <script>
-      // Bad
+     //Bad
       // const lis = document.querySelectorAll('li');
       // lis.forEach(li => {
       //   li.addEventListener('click', () => {
-      //     li.classList.add('selected');
+      //     li.style.backgroundColor = 'yellow'
       //   });
       // });
 
@@ -36,7 +36,7 @@
       const ul = document.querySelector("ul");
       ul.addEventListener("click", (event) => {
         if (event.target.tagName == "LI") {
-          event.target.classList.toggle("selected");
+          event.target.style.backgroundColor = 'yellow';
         }
       });
     </script>
