@@ -89,3 +89,8 @@ img {
 .alert h1 {
   color: white;
 }
+
+.bug:hover,
+.carrot:hover {
+  transform: scale(1.1);
+}
