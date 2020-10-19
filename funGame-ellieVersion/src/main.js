@@ -1,4 +1,6 @@
-"use strict";
+import PopUp from "./popup.js";
+
+("use strict");
 const CARROT_SIZE = 80;
 let CARROT_COUNT = 10;
 const BUG_COUNT = 5;
@@ -11,10 +13,6 @@ const gameBtn = document.querySelector(".game__button");
 const gameScore = document.querySelector(".game__score");
 const gameTimer = document.querySelector(".game__timer");
 
-const popup = document.querySelector(".pop-up");
-const popupMessage = document.querySelector(".pop-up__message");
-const popupBtn = document.querySelector(".pop-up__refresh");
-
 const carrotSound = new Audio("./sound/carrot_pull.mp3");
 const alertSound = new Audio("./sound/alert.wav");
 const bgSound = new Audio("./sound/bg.mp3");
@@ -25,6 +23,12 @@ let started = false;
 let score = 0;
 let timer = undefined; // setInterval할당할 변수 - 전역변수로 한이유는
 // 어떤 곳에서든 clearInterval(timer)로 멈출수 있게하기위해서.
+
+const finishGameBanner = new PopUp();
+finishGameBanner.setClickListener(() => {
+  startGame();
+  showPlayButton();
+});
 
 field.addEventListener("click", onFieldClick);
 //콜백함수 함수로처리.
@@ -38,7 +42,6 @@ function onFieldClick(event) {
     score++;
     playSound(carrotSound);
     updateScoreBoard();
-    // stopGameTimer();
     if (score === CARROT_COUNT) finishGame(true);
   } else if (target.matches(".bug")) {
     finishGame(false);
@@ -55,12 +58,6 @@ function stopSound(sound) {
 function updateScoreBoard() {
   gameScore.innerText = CARROT_COUNT - score;
 }
-
-popupBtn.addEventListener("click", () => {
-  startGame();
-  hidePopup();
-  showPlayButton();
-});
 
 gameBtn.addEventListener("click", (event) => {
   if (started) {
@@ -84,7 +81,7 @@ function stopGame() {
   stopGameTimer();
   hidePlayButton();
   playSound(alertSound);
-  showPopup("REPLAY??");
+  finishGameBanner.show("REPLAY??");
   stopSound(bgSound);
 }
 
@@ -94,11 +91,11 @@ function finishGame(win) {
   stopSound(bgSound);
   if (win === true) {
     playSound(winSound);
-    showPopup("WIN");
+    finishGameBanner.show("WIN");
     hidePlayButton();
   } else {
     playSound(bugSound);
-    showPopup("LOSE");
+    finishGameBanner.show("LOSE");
     hidePlayButton();
   }
 }
@@ -142,13 +139,6 @@ function hidePlayButton() {
 }
 function showPlayButton() {
   gameBtn.style.visibility = "visible";
-}
-function showPopup(text) {
-  popupMessage.innerText = text;
-  popup.classList.remove("pop-up--hide");
-}
-function hidePopup() {
-  popup.classList.add("pop-up--hide");
 }
 
 function initGame() {
