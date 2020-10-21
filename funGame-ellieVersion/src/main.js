@@ -1,5 +1,5 @@
 import PopUp from "./popup.js";
-import GameBuilder from "./game.js";
+import { GameBuilder, Reason } from "./game.js";
 
 ("use strict");
 
@@ -19,6 +19,20 @@ finishGameBanner.setClickListener(() => {
   game.showPlayButton();
 });
 
-game.setGameListener((text) => {
-  finishGameBanner.show(text);
+game.setGameListener((reason) => {
+  let message;
+  switch (reason) {
+    case Reason.cancel:
+      message = "REPLAY??";
+      break;
+    case Reason.win:
+      message = "WIN!!!";
+      break;
+    case Reason.lose:
+      message = "LOSE ㅠ.ㅠ";
+      break;
+    default:
+      throw new Error("not valie messgage");
+  }
+  finishGameBanner.show(message);
 });

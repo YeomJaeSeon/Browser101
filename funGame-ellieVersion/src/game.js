@@ -3,7 +3,13 @@
 import Field from "./field.js";
 import * as sound from "./sound.js";
 
-export default class GameBuilder {
+export const Reason = Object.freeze({
+  cancel: "cancel",
+  win: "win",
+  lose: "lose",
+});
+
+export class GameBuilder {
   withDuration(duration) {
     this.duration = duration;
     return this;
@@ -82,7 +88,7 @@ class Game {
     this.stopGameTimer();
     this.hidePlayButton();
     sound.playAlert();
-    this.callback && this.callback("REPLAY??");
+    this.callback && this.callback(Reason.cancel);
     sound.stopBg();
   }
   finishGame(win) {
@@ -91,11 +97,11 @@ class Game {
     sound.stopBg();
     if (win === true) {
       sound.playWin();
-      this.callback && this.callback("WIN!!!");
+      this.callback && this.callback(Reason.win);
       this.hidePlayButton();
     } else {
       sound.playBug();
-      this.callback && this.callback("LOSE ㅠ.ㅠ");
+      this.callback && this.callback(Reason.lose);
       this.hidePlayButton();
     }
   }
