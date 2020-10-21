@@ -4,9 +4,10 @@ import * as sound from "./sound.js";
 const CARROT_SIZE = 80;
 
 export default class Field {
-  constructor(bugCount, carrotCount) {
+  constructor(bugCount, carrotCount, isGamming) {
     this.bugCount = bugCount;
     this.carrotCount = carrotCount;
+    this.isGamming = isGamming;
 
     this.field = document.querySelector(".game__field");
     this.fieldRect = this.field.getBoundingClientRect();
@@ -21,6 +22,7 @@ export default class Field {
     this.setItemClick = setItemClick;
   }
   click = (event) => {
+    if (!this.isGamming()) return;
     const target = event.target;
     if (target.matches(".carrot")) {
       target.remove();
