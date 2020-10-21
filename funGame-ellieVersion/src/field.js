@@ -12,23 +12,24 @@ export default class Field {
     this.fieldRect = this.field.getBoundingClientRect();
 
     this.field.addEventListener("click", this.click);
+    // click메소드를 콜백함수로 전달하면 click메소드의 this는 컨텍스트 대상을 잃게된다
+    //즉, click메소드의 this.setItemClick에서의 this는 Field클래스를 나타내는데
+    // 콜백함수로 click메소드를 전달하면 Field 클래스(this)와 click메소드와 연결이 되어있게되지않는다는 것이다
+    // 그러므로 this(Field클래스)와 click메소드를 묶어줄 바인딩하는 과정이필요하다!
   }
   setOnClickListener(setItemClick) {
-    console.log("setOnClickListener");
     this.setItemClick = setItemClick;
-    console.log("setOnClickListener finish");
   }
-  click(event) {
+  click = (event) => {
     const target = event.target;
     if (target.matches(".carrot")) {
       target.remove();
       sound.playCarrot();
-      console.log(this.setItemClick); //?? 왜 undefined?
       this.setItemClick && this.setItemClick("carrot");
     } else if (target.matches(".bug")) {
       this.setItemClick && this.setItemClick("bug");
     }
-  }
+  };
   init() {
     this.field.innerHTML = "";
     this._addItem("carrot", this.carrotCount, "img/carrot.png");
