@@ -1,6 +1,6 @@
 "use strict";
 
-import Field from "./field.js";
+import { Field, Item } from "./field.js";
 import * as sound from "./sound.js";
 
 export const Reason = Object.freeze({
@@ -45,7 +45,7 @@ class Game {
     //이벤트리스너 생성된다!
     this.gameBtn.addEventListener("click", () => {
       if (this.started) {
-        this.stopGame();
+        this.stop(Reason.cancel);
       } else {
         this.startGame();
       }
@@ -60,12 +60,12 @@ class Game {
     this.gameField.setOnClickListener(this.itemClick);
   }
   itemClick(item) {
-    if (item === "carrot") {
+    if (item === Item.carrot) {
       this.score++;
       this.updateScoreBoard();
-      if (this.score === this.CarrotCount) this.finishGame(true);
-    } else if (item === "bug") {
-      this.finishGame(false);
+      if (this.score === this.CarrotCount) this.stop(Reason.win);
+    } else if (item === Item.bug) {
+      this.stop(Reason.lose);
     }
   }
   updateScoreBoard() {
@@ -83,27 +83,12 @@ class Game {
     this.callback = callback;
   }
 
-  stopGame() {
+  stop(reason) {
     this.started = false;
     this.stopGameTimer();
     this.hidePlayButton();
-    sound.playAlert();
-    this.callback && this.callback(Reason.cancel);
-    sound.stopBg();
-  }
-  finishGame(win) {
-    this.started = false;
-    this.stopGameTimer();
-    sound.stopBg();
-    if (win === true) {
-      sound.playWin();
-      this.callback && this.callback(Reason.win);
-      this.hidePlayButton();
-    } else {
-      sound.playBug();
-      this.callback && this.callback(Reason.lose);
-      this.hidePlayButton();
-    }
+
+    this.callback && this.callback(reason);
   }
   showStopButton() {
     const icon = this.gameBtn.querySelector(".fas");
@@ -120,7 +105,7 @@ class Game {
     this.timer = setInterval(() => {
       if (remainTimers <= 0) {
         clearInterval(this.timer);
-        this.finishGame(this.score === this.CarrotCount);
+        this.stop(this.carrotCount === this.score ? Reason.win : Reason.lose);
         return;
       } else {
         this.upDateTimerText(--remainTimers);

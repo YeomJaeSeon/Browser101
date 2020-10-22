@@ -1,5 +1,6 @@
 import PopUp from "./popup.js";
 import { GameBuilder, Reason } from "./game.js";
+import * as sound from "./sound.js";
 
 ("use strict");
 
@@ -21,15 +22,19 @@ finishGameBanner.setClickListener(() => {
 
 game.setGameListener((reason) => {
   let message;
+  sound.stopBg();
   switch (reason) {
     case Reason.cancel:
       message = "REPLAY??";
+      sound.playAlert();
       break;
     case Reason.win:
       message = "WIN!!!";
+      sound.playWin();
       break;
     case Reason.lose:
       message = "LOSE ㅠ.ㅠ";
+      sound.playBug();
       break;
     default:
       throw new Error("not valie messgage");
