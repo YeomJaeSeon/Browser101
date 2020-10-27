@@ -26,4 +26,7 @@ addEventListener("load", () => {
 
     target.innerHTML = `${x}px, ${y}px`;
   });
+  document.addEventListener("click", () => {
+    console.log("clicked");
+  });
 });
