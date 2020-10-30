@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>Calculate !</button>
+    <script>
+        const button = document.querySelector('button');
+
+        function add(n1, n2){
+            const result = n1 + n2;
+            return result;
+        }
+
+        function calculate(){
+            const result = add(3, 4);
+            return result;
+        }
+
+        function main(){
+            console.log('main');
+            const result = calculate();
+            const tag = document.createElement('span');
+            document.body.appendChild(tag);
+            tag.innerText = result;
+
+            
+        }
+        button.addEventListener('click', ()=>{
+            main();
+        })
+    </script>
+</body>
+</html>
