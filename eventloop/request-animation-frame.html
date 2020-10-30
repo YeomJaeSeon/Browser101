@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    button{
+        width:100px;
+        height:70px;
+    }
+    button:hover{
+        background-color:wheat;
+    }
+    </style>
+
+</head>
+<body>
+    <button>Request Animation Frame</button>
+    <script>
+
+        const button = document.querySelector('button');
+        button.addEventListener('click',()=>{
+            requestAnimationFrame(()=>{
+                document.body.style.backgroundColor = 'blue';
+
+            });
+            requestAnimationFrame(()=>{
+                document.body.style.backgroundColor = 'orange';
+            })
+            requestAnimationFrame(()=>{
+                document.body.style.backgroundColor = 'red'
+            })
+            setTimeout(()=>{
+                //do something : 이 이벤트리스너 콜백 다처리한 후 다음 턴에 뭔갈하고싶을때
+                //사용하는 기술ㅋ
+            }, 0)
+        })
+    </script>
+    
+</body>
+</html>
